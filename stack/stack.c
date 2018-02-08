@@ -7,7 +7,6 @@
  * pop() removes the member on the top of the stack and returns a value
  * print() prints the state of the stack (all of it's members)
  * len() returns the number of members in the stack
- * reverse() reverses the order of the stack (?)
  *
  * author: lee gaines (@eightlimbed) - feb 7, 2018
  */
@@ -50,7 +49,7 @@ node *create(node **stack, char *first_name, char *last_name, unsigned int age)
 }
 
 /**
- * push: adds a member to the stack and prints a message
+ * push: adds a member to the stack
  * @stack: pointer to address of the top of the stack (node **)
  * @first_name: first name attribute (char *)
  * @last_name: last name attribute (char *)
@@ -62,13 +61,12 @@ void push(node **stack, char *first_name, char *last_name, unsigned int age)
 {
 	node *new_member;
 
-	printf("adding %s to the stack\n", first_name);
 	new_member = create(stack, first_name, last_name, age);
 	*stack = new_member;
 }
 
 /**
- * pop: removes a member from the top of the stack and prints a message
+ * pop: removes a member from the top of the stack
  * @stack: pointer to the address of the top of the stack (node **)
  *
  * return: void
@@ -79,7 +77,6 @@ void pop(node **stack)
 
 	if (stack == NULL || *stack == NULL)
 		return;
-	printf("removing %s from the stack\n", (*stack)->first_name);
 	temp = (*stack)->next;
 	free(*stack);
 	*stack = temp;
@@ -114,36 +111,40 @@ void print(node *stack)
 {
 	if (stack == NULL)
 	{
-		printf("there are no members on the stack. try push()\n");
+		printf("there are no members on the stack. try push()\n------\n");
 		return;
 	}
 	printf("there are %u member(s) in the stack:\n------\n", len(stack));
 	while (stack)
 	{
-		printf("[%s - age %u]\n------\n", stack->first_name, stack->age);
+		printf("[%s - age %u]\n", stack->first_name, stack->age);
 		stack = stack->next;
 	}
 }
 
+/**
+ * main: entry point used for testing
+ *
+ * return: 0 (success)
+ */
 int main(void)
 {
 	node *stack;
 
 	stack = NULL;
+	pop(&stack);
 	print(stack);
-	push(&stack, "Derrick", "Gaines", 32);
+	push(&stack, "Michael", "Jordan", 49);
 	print(stack);
-	push(&stack, "Sally", "Henderson", 24);
+	push(&stack, "Sharon", "Stone", 24);
 	print(stack);
-	push(&stack, "Lee", "Gaines", 30);
+	push(&stack, "Wilson", "Holiday", 30);
 	print(stack);
 	pop(&stack);
 	print(stack);
 	pop(&stack);
 	print(stack);
 	push(&stack, "Theo", "Huxtable", 14);
-	print(stack);
-	pop(&stack);
 	print(stack);
 	pop(&stack);
 	print(stack);
