@@ -85,18 +85,48 @@ void pop(node **stack)
 	*stack = temp;
 }
 
+/**
+ * len: computes the number of members in the stack
+ * @stack: pointer to the address of the top of the stack (node **)
+ *
+ * return: number of members (unsigned int)
+ */
+unsigned int len(node *stack)
+{
+	unsigned int count;
+
+	count = 0;
+	while (stack)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
+}
+
 int main(void)
 {
 	node *stack;
 
 	stack = NULL;
+	printf("length: %u\n", len(stack));
 	push(&stack, "Derrick", "Gaines", 32);
+	printf("length: %u\n", len(stack));
 	push(&stack, "Sally", "Henderson", 24);
+	printf("length: %u\n", len(stack));
 	push(&stack, "Lee", "Gaines", 30);
+	printf("length: %u\n", len(stack));
 	pop(&stack);
+	printf("length: %u\n", len(stack));
 	pop(&stack);
+	printf("length: %u\n", len(stack));
 	push(&stack, "Theo", "Huxtable", 14);
+	printf("length: %u\n", len(stack));
 	pop(&stack);
+	printf("length: %u\n", len(stack));
 	pop(&stack);
+	printf("length: %u\n", len(stack));
+	pop(&stack);
+	printf("length: %u\n", len(stack));
 	return (0);
 }
