@@ -87,7 +87,7 @@ void pop(node **stack)
 
 /**
  * len: computes the number of members in the stack
- * @stack: pointer to the address of the top of the stack (node **)
+ * @stack: pointer to the top of the stack (node *)
  *
  * return: number of members (unsigned int)
  */
@@ -104,29 +104,50 @@ unsigned int len(node *stack)
 	return (count);
 }
 
+/**
+ * print: prints the length of the stack and all of it's members' first names
+ * @stack: pointer to the top of the stack (node *)
+ *
+ * return: void
+ */
+void print(node *stack)
+{
+	if (stack == NULL)
+	{
+		printf("there are no members on the stack. try push()\n");
+		return;
+	}
+	printf("there are %u member(s) in the stack:\n------\n", len(stack));
+	while (stack)
+	{
+		printf("[%s - age %u]\n------\n", stack->first_name, stack->age);
+		stack = stack->next;
+	}
+}
+
 int main(void)
 {
 	node *stack;
 
 	stack = NULL;
-	printf("length: %u\n", len(stack));
+	print(stack);
 	push(&stack, "Derrick", "Gaines", 32);
-	printf("length: %u\n", len(stack));
+	print(stack);
 	push(&stack, "Sally", "Henderson", 24);
-	printf("length: %u\n", len(stack));
+	print(stack);
 	push(&stack, "Lee", "Gaines", 30);
-	printf("length: %u\n", len(stack));
+	print(stack);
 	pop(&stack);
-	printf("length: %u\n", len(stack));
+	print(stack);
 	pop(&stack);
-	printf("length: %u\n", len(stack));
+	print(stack);
 	push(&stack, "Theo", "Huxtable", 14);
-	printf("length: %u\n", len(stack));
+	print(stack);
 	pop(&stack);
-	printf("length: %u\n", len(stack));
+	print(stack);
 	pop(&stack);
-	printf("length: %u\n", len(stack));
+	print(stack);
 	pop(&stack);
-	printf("length: %u\n", len(stack));
+	print(stack);
 	return (0);
 }
